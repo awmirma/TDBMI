@@ -1,14 +1,34 @@
-from tciaclient.core import TCIAClient
-# print("ttt")
-# def load_TCIA_data():
-print("start downloading...")
-tc = TCIAClient()
-collection_name = "NSCLC-Radiomics"
-series = tc.get_series(collection=collection_name, modality="CT")
-download_path = "./tcia-downloads"
-for i, s in enumerate(series):
-    print(i)
-    tc.get_image(seriesInstanceUid = s["SeriesInstanceUID"],
-        downloadPath = download_path, zipFileName = str(i).zfill(3)+"-"+collection_name+".zip")
-    
-print("\nDownload complited . Saved in ./tcia_downloads")
+import os
+import requests
+import zipfile
+
+def extract_dataset(output_dir):
+
+    try:
+        zip_file_path = "/home/awmirma/Documents/AI/practice/Tumor_Detection_in_Brain_MRI_Images/Dataset/1.1.zip"
+        # Extract the contents of the ZIP file
+        with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
+            zip_ref.extractall(output_dir)
+
+        # Remove the ZIP file after extraction
+        os.remove(zip_file_path)
+
+        print("Dataset extracted successfully.")
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+        raise
+
+if __name__ == "__main__":
+    # Replace "./tcia_dataset" with the path where you want to save the dataset
+    output_directory = "/home/awmirma/Documents/AI/practice/Tumor_Detection_in_Brain_MRI_Images/Dataset/2"
+    extract_dataset(output_directory)
+
+
+
+# dataset from https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset 
+# This dataset is a combination of the following three datasets :
+# figshare
+# SARTAJ dataset
+# Br35H
+

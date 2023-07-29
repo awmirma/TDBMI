@@ -1,6 +1,11 @@
 import os
 import requests
 import zipfile
+import os
+import numpy as np
+from PIL import Image
+from sklearn.model_selection import train_test_split
+
 
 def extract_dataset(output_dir):
 
@@ -19,6 +24,8 @@ def extract_dataset(output_dir):
         print(f"Error: {e}")
         raise
 
+def Load_TDBMI_data():
+    train_images , Train_Labels
 if __name__ == "__main__":
     # Replace "./tcia_dataset" with the path where you want to save the dataset
     output_directory = "/home/awmirma/Documents/AI/practice/Tumor_Detection_in_Brain_MRI_Images/Dataset/2"
